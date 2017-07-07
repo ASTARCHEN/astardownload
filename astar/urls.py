@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url, include
-from astardownload.views import register
+from astardownload.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^astardownload/register/$',register),
+    url(r'^astardownload/register/$',do_register),
+    url(r'^astardownload/upload/$',do_upload),
+    url(r'^astardownload/download/$',do_download),
 ]
