@@ -16,9 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url, include
 from astardownload.views import *
+
+admin.autodiscover()
+
 urlpatterns = [
+    url(r'^astardownload/$',index),
+    url(r'^/',index),
+    url(r'^/index',index),
     url(r'^admin/', admin.site.urls),
     url(r'^astardownload/register/$',do_register),
     url(r'^astardownload/upload/$',do_upload),
     url(r'^astardownload/download/$',do_download),
+    url(r'^astardownload/login/$',do_login),
+    url(r'^astardownload/zone/$',myzone),
 ]

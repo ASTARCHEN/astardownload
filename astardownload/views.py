@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django import forms
 from django.http import HttpResponse
@@ -73,5 +74,8 @@ def do_admin(req):
     print(mystr)
     return render_to_response(mystr, {'uf': uf})
 
-def do_index(req):
+def index(req):
     return render_to_response(cp.get('html','index'))
+
+def myzone(req):
+    pass
