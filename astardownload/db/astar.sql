@@ -1,25 +1,24 @@
-# Host: localhost  (Version: 5.5.32)
-# Date: 2017-07-07 11:21:02
+﻿# Host: localhost  (Version: 5.5.53)
+# Date: 2017-07-09 11:17:28
 # Generator: MySQL-Front 5.3  (Build 4.234)
 
-
-CREATE DATABASE IF NOT EXISTS astar;
-
-
-# /*!40101 SET NAMES gb2312 */;
+# /*!40101 SET NAMES utf8 */;
 
 #
 # Structure for table "astar_action"
 #
+CREATE DATABASE IF NOT EXISTS astar;
+
+USE astar;
 
 CREATE TABLE IF NOT EXISTS `astar_action` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` varchar(255) DEFAULT NULL,
-  `fieid` varchar(255) DEFAULT NULL,
-  `actioncode` varchar(255) DEFAULT NULL,
-  `integralschange` varchar(255) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL,
+  `fileid` int(11) DEFAULT NULL,
+  `actioncode` int(11) DEFAULT NULL,
+  `integralschange` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 #
 # Data for table "astar_action"
@@ -35,9 +34,9 @@ CREATE TABLE IF NOT EXISTS `astar_file` (
   `filename` varchar(255) DEFAULT NULL,
   `remotepath` varchar(255) DEFAULT NULL,
   `tag` varchar(255) DEFAULT NULL,
-  `uploadtime` varchar(255) DEFAULT NULL,
+  `uploadtime` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 #
 # Data for table "astar_file"
@@ -52,8 +51,9 @@ CREATE TABLE IF NOT EXISTS `astar_search` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` varchar(255) DEFAULT NULL,
   `searchstring` varchar(255) DEFAULT NULL,
+  `searchtime` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 #
 # Data for table "astar_search"
@@ -74,10 +74,10 @@ CREATE TABLE IF NOT EXISTS `astar_user` (
   `sex` varchar(255) DEFAULT NULL,
   `realname` varchar(255) DEFAULT NULL,
   `IDcard` varchar(255) DEFAULT NULL,
-  `registertime` varchar(255) DEFAULT NULL,
-  `integrals` varchar(255) DEFAULT NULL,  
+  `registertime` datetime DEFAULT NULL,
+  `integrals` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 #
 # Data for table "astar_user"

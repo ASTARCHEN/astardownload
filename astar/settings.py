@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import configparser
+
+cp = configparser.ConfigParser()
+cp.read('myconfig.conf')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,14 +79,23 @@ WSGI_APPLICATION = 'astar.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'USER':'cxl',
+#         'PASSWORD':'x1fx2g',
+#
+#     }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'USER':'cxl',
-        'PASSWORD':'x1fx2g',
-
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': cp.get('db', 'name'),
+        'USER': cp.get('db', 'user'),
+        'PASSWORD': cp.get('db', 'password'),
+        'HOST': cp.get('db', 'host'),
+        'PORT': cp.get('db', 'port'),
     }
 }
+
 
 
 # Password validation

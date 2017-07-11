@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django import forms
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-import configparser
-import logging
+import os
+import sys
+from astardownload.util.uploadhelper import *
 
 cp = configparser.ConfigParser()
 cp.read('myconfig.conf')
@@ -38,10 +39,20 @@ def do_upload(req):
             # 得到文件名
             myfile_name = myfile.name
             # fp = file(prefix_upload + myfile_name, 'wb')
-            fp = open(prefix_upload+myfile_name,'wb')
+            localpath = prefix_upload+myfile_name
+            fp = open(localpath,'wb')
             fp.write(myfile.read())
+
             fp.close()
-            return HttpResponse('ok')
+            fp = open(localpath,'rb')
+            # 绝对路径获取
+            abspath = os.path.abspath(sys.argv[0])
+            abspath = os.path.dirname(abspath) + cp.get('dirs', 'abspath_upload')+'/'
+            print(abspath)
+            print(abspath+myfile_name)
+            resstr = uploadfile(0,abspath+myfile_name,'matlab/test/test')
+            fp.close()
+            return HttpResponse(resstr)
     else:
         uf = UserFormUpload()
     mystr = cp.get('html','upload')
@@ -67,6 +78,7 @@ def do_admin(req):
             fp = open(prefix_upload+myfile_name,'wb')
             fp.write(myfile.read())
             fp.close()
+
             return HttpResponse('ok')
     else:
         uf = UserFormUpload()

@@ -22,7 +22,6 @@ admin.autodiscover()
 urlpatterns = [
     url(r'^astardownload/$',index),
     url(r'^/',index),
-    url(r'^/index',index),
     url(r'^admin/', admin.site.urls),
     url(r'^astardownload/register/$',do_register),
     url(r'^astardownload/upload/$',do_upload),
