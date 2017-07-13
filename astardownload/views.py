@@ -5,7 +5,10 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 import os
 import sys
-from astardownload.util.uploadhelper import *
+import configparser
+from astardownload.util.downloadhelper import big_file_download
+from astardownload.util.uploadhelper import uploadfile
+from django.http import StreamingHttpResponse
 
 cp = configparser.ConfigParser()
 cp.read('myconfig.conf')
@@ -19,14 +22,15 @@ class UserFormUpload(forms.Form):
     注册
 '''
 def do_register(req):
-    if req.method == 'POST':
-        form = UserForm(req.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-            return HttpResponse('ok')
-    else:
-        form = UserForm()
-    return render_to_response(cp.get('html','register'),{'form':form})
+    pass
+    # if req.method == 'POST':
+    #     form = UserForm(req.POST)
+    #     if form.is_valid():
+    #         print(form.cleaned_data)
+    #         return HttpResponse('ok')
+    # else:
+    #     form = UserForm()
+    # return render_to_response(cp.get('html','register'),{'form':form})
 
 def do_upload(req):
 
@@ -63,7 +67,18 @@ def do_login(req):
     pass
 
 def do_download(req):
-    pass
+    fileid = int(req.GET.get('fileid', -1))
+    res = big_file_download(fileid)
+    if res is None:
+        resstr = 'remote file is not found'
+        response = HttpResponse(resstr)
+    else:
+        obj2 = res['file_obj']
+        the_file_name = res['file_name']
+        response = StreamingHttpResponse(obj2)
+        response['Content-Type'] = 'application/octet-stream'
+        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
+    return response
 
 def do_admin(req):
     if req.method == 'POST':
@@ -91,3 +106,8 @@ def index(req):
 
 def myzone(req):
     pass
+
+
+
+
+

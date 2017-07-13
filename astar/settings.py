@@ -44,11 +44,15 @@ INSTALLED_APPS = [
     'astardownload',
 ]
 
-MIDDLEWARE = [
+# MIDDLEWARE = [ (django1.9-)
+# 参考 http://blog.csdn.net/xiongjiezk/article/details/53220302
+# 参考 http://www.ziqiangxuetang.com/django/django-middleware.html
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
