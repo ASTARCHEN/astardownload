@@ -3,7 +3,7 @@
 from astardownload.util.ossClientHelper import *
 import datetime
 import astardownload.models as models
-
+from astardownload.exception.astarDownloadException import OSSFileUploadException
 
 def uploadfile(userid,uploadedfilepath,tag):
     strsplit = str(uploadedfilepath).split('/')
@@ -17,12 +17,9 @@ def uploadfile(userid,uploadedfilepath,tag):
         # OSS上传
         oss_upload(remotefilename,uploadedfilepath)
 
-    except BaseException:
+    except OSSFileUploadException:
         # 上传失败
-        mydatetime = datetime.datetime.now()
-        timeString = mydatetime.strftime('%Y-%m-%d %H:%M:%S')
-        errorString = 'oss upload ' + uploadedfilename + ' failed at ' + timeString
-        print(errorString)
+        errorString = str(OSSFileUploadException)
         return errorString
     else:
         mydatetime = datetime.datetime.now()

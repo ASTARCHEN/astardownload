@@ -3,6 +3,7 @@ import datetime
 import sys
 import astardownload.models as models
 from astardownload.util.ossClientHelper import *
+from astardownload.exception.astarDownloadException import OSSFileDownloadException
 from django.http import StreamingHttpResponse
 #
 def big_file_download(fileid):
@@ -27,15 +28,16 @@ def big_file_download(fileid):
             remotepath = obj.remotepath;
             try:
                 oss_download(remotepath, localpath)
-            except BaseException:
+            except OSSFileDownloadException:
+                errorString = str(OSSFileDownloadException)
+                print(errorString)
                 return None
-        res = [];
-        res = {'file_obj':file_iterator(localpath),'file_name': the_file_name}
+        res = {'file_obj': file_iterator(localpath), 'file_name': the_file_name}
         return res
     else:
+
         # 没有对应的文件
-        # do sth...
-        pass
+        print(str(FileNotFoundError))
     return None
 
 
