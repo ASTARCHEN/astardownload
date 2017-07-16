@@ -10,7 +10,7 @@
 body{
 	font: 13px/1.3 'Microsoft Yahei','宋体';
 	color: #999;
-	background-color: #CECEFF;
+	background-color: #FFFFFF;
 }
 #page,#footer_inner{margin:0 auto;width:960px;}
 h1#logo{overflow:hidden;height:93px;padding: 25px 0;}
