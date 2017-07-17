@@ -55,3 +55,9 @@ class file(models.Model):
     remotepath = models.CharField(max_length=255)
     tag = models.CharField(max_length=255)
     uploadtime = models.DateTimeField(auto_now_add=True)
+    md5 = models.CharField(max_length=255)
+    abstract = models.CharField(max_length=2048)
+    eabstract = models.CharField(max_length=2048)
+
+
+

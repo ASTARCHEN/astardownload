@@ -10,30 +10,39 @@ from astardownload.util.downloadhelper import big_file_download
 from astardownload.util.uploadhelper import uploadfile
 from django.http import StreamingHttpResponse
 
+
 cp = configparser.ConfigParser()
 cp.read('myconfig.conf')
 # Create your views here.
 class UserForm(forms.Form):
-    name = forms.CharField()
+    # TODO(A.Star) 需要重新定义用户信息
+    username = forms.CharField()
+    password = forms.PasswordInput()
+    passwordagain = forms.PasswordInput()
+
 
 class UserFormUpload(forms.Form):
     myfile = forms.FileField()
+
 '''
     注册
 '''
 def do_register(req):
-    pass
-    # if req.method == 'POST':
-    #     form = UserForm(req.POST)
-    #     if form.is_valid():
-    #         print(form.cleaned_data)
-    #         return HttpResponse('ok')
-    # else:
-    #     form = UserForm()
-    # return render_to_response(cp.get('html','register'),{'form':form})
+    # TODO(A.Star) 需要重写注册
+    if req.method == 'POST':
+        form = UserForm(req.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            return HttpResponse('ok')
+    else:
+        form = UserForm()
+    return render_to_response(cp.get('html','register'),{'form':form})
+
+
 
 def do_upload(req):
-
+    # TODO(A.Star) 添加MD5重复检测功能
+    # TODO(A.Star) 需要传进用户id
     if req.method == 'POST':
         uf = UserFormUpload(req.POST, req.FILES)
         if uf.is_valid():
@@ -64,6 +73,7 @@ def do_upload(req):
     return render_to_response(mystr, {'uf': uf})
 
 def do_login(req):
+    # TODO(A.Star） 需要重写登录操作
     pass
 
 def do_download(req):
@@ -79,7 +89,9 @@ def do_download(req):
         response['Content-Type'] = 'application/octet-stream'
         response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
     return response
-
+'''
+管理员界面
+'''
 def do_admin(req):
     if req.method == 'POST':
         uf = UserFormUpload(req.POST, req.FILES)
@@ -100,13 +112,23 @@ def do_admin(req):
     mystr = cp.get('html','upload')
     print(mystr)
     return render_to_response(mystr, {'uf': uf})
-
+'''
+主页
+'''
 def index(req):
     return render_to_response(cp.get('html','index'))
-
+'''
+个人信息页
+'''
 def myzone(req):
-    pass
-
+    userid = int(req.GET.get('userid', -1))
+    if req.method == 'GET':
+        if userid == -1:
+            return render_to_response(cp.get('html', 'myzone'))
+        else:
+            return render_to_response(cp.get('html', 'myzone'), {'userid': userid})
+    elif req.method == 'POST':
+        pass
 
 
 
