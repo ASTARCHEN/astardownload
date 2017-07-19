@@ -5,15 +5,17 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 import os
 import sys
+import json
 import configparser
 from astardownload.util.downloadhelper import big_file_download
 from astardownload.util.uploadhelper import uploadfile
+from astardownload.util.sms import send_sms
+# from astardownload.util.uploadhelper import uploadfile
 from django.http import StreamingHttpResponse
-
 
 cp = configparser.ConfigParser()
 cp.read('myconfig.conf')
-# Create your views here.
+
 class UserForm(forms.Form):
     # TODO(A.Star) 需要重新定义用户信息
     username = forms.CharField()
@@ -36,15 +38,33 @@ class UserFormUpload(forms.Form):
 def do_register(req):
     # TODO(A.Star) 需要重写注册
     if req.method == 'POST':
-        form = UserForm(req.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-            return HttpResponse('ok')
+        # form = UserForm(req.POST)
+        # if form.is_valid():
+        #
+        #     print(form.cleaned_data)
+        #     return HttpResponse('ok')
+        realname = req.POST.get('realname')
+        phone = req.POST.get('phone')
+        if req.POST.get('button') == '获取验证码':
+            yzm = '【253云通讯】您的验证码为1234'
+            # TODO(A.Star) 需要验证验证码是否正常发送
+            json_str = send_sms(text=yzm,phone=phone).decode()
+            data = json.loads(json_str)
+            # return HttpResponse(data[''])
+        elif req.POST.get('button') == '完成':
+            # TODO(A.Star) 需要判断完成之后的动作
+            pass
+
+        return render_to_response(cp.get('html','register'),{'phone':phone, 'realname':realname, 'yzm':""})
     # else:
     #     form = UserForm()
     # return render_to_response(cp.get('html','register'),{'form':form})
     else:
-        return render_to_response(cp.get('html', 'register'))
+        # 开始时候GET的界面
+        phone = ""
+        realname = ""
+        yzm = ""
+        return  render_to_response(cp.get('html','register'),{'phone':phone, 'realname':realname, 'yzm':yzm})
 
 
 
