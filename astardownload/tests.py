@@ -1,20 +1,13 @@
 from django.test import TestCase
-import configparser
-# import urllib2 python2
-import urllib.request as urllib2
+from astardownload.util.filehelper import *
 # Create your tests here.
 
+# if __name__ == '__main__':
+#   filepath = 'E:/cxl/snowland/astar/astardownload/util/filehelper.py'
+#   print(CalcSha1(filepath))
+#   print(CalcMD5(filepath))
+#   print(rename(filepath))
 
-
-cp = configparser.ConfigParser()
-cp.read('myconfig.conf')
-
-url = 'http://localhost/astardownlaod/uplaod/'
-# f = urllib.urlopen(url)
-# data = f.read()
-# with open(cp.get('dirs','prefix_upload')+"/demo2.zip", "wb") as code:
-#     code.write(data)
-
-f = urllib2.urlopen(url)
-with open("demo2.zip", "wb") as code:
-  code.write(f.read())
+if __name__ == '__main__':
+  filepath = 'E:/cxl/snowland/astar/astardownload/util/util.zip'
+  print(namelist(filepath))
