@@ -20,6 +20,12 @@ class UserForm(forms.Form):
     password = forms.PasswordInput()
     passwordagain = forms.PasswordInput()
 
+class RegisterForm(forms.Form):
+
+    pass
+
+
+
 
 class UserFormUpload(forms.Form):
     myfile = forms.FileField()
@@ -116,7 +122,10 @@ def do_admin(req):
 主页
 '''
 def index(req):
-    return render_to_response(cp.get('html','index'))
+    if req.method == "GET":
+        return render_to_response(cp.get('html','index'))
+    elif req.method == "POST":
+        pass
 '''
 个人信息页
 '''
