@@ -40,9 +40,11 @@ def do_register(req):
         if form.is_valid():
             print(form.cleaned_data)
             return HttpResponse('ok')
+    # else:
+    #     form = UserForm()
+    # return render_to_response(cp.get('html','register'),{'form':form})
     else:
-        form = UserForm()
-    return render_to_response(cp.get('html','register'),{'form':form})
+        return render_to_response(cp.get('html', 'register'))
 
 
 
