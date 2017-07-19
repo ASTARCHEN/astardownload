@@ -3,8 +3,9 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>注册</title>
-	<link rel="stylesheet" href="css/base.css" />
-	<link rel="stylesheet" href="css/layout.css"/>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{%static'css/base.css'%}" >
+	<link rel="stylesheet" href="{%static'css/layout.css'%}">
 	<script type="text/javascript">
 function MM_swapImgRestore() { //v3.0
   var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
@@ -45,7 +46,7 @@ function MM_swapImage() { //v3.0
 				</div>
 			</div>
 			<div id="headBox">
-				<div class="w960 oh"><a href="../index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image2','','images/logo2.png',1)"><img src="images/logo1.png" width="570" height="90" id="Image2"></a>
+				<div class="w960 oh"><a href="../index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image2','','images/logo2.png',1)"><img src="../../static/images/logo1.png" width="570" height="90" id="Image2"></a>
 				  <nav id="navs" class="fr">
 					  <a href="../index.html">首页</a>
 					  <a class="active" href="#">站长信箱</a>
@@ -104,7 +105,7 @@ function MM_swapImage() { //v3.0
 							<label class="frm_label">验证码</label>
 							<div class="frm_controls verifycode">
 								<input type="text" name="" class="frm_input verifyCode" maxlength="4"/>
-								<img src="images/verifycode.jpeg" alt="" />
+								<img src="../../static/images/verifycode.jpeg" alt="" />
 								<a class="changeVerifyCode" href="javascript:;">换一张</a>
 							</div>
 						</div>
@@ -159,7 +160,7 @@ function MM_swapImage() { //v3.0
 		</footer><!-- // footer end -->
 </div><!-- // wrapper end -->
 	
-	<script src="js/jquery.min.js"></script>
+	<script src="../../static/js/jquery.min.js"></script>
 	<script> 
 		//显示提示框，目前三个参数(txt：要显示的文本；time：自动关闭的时间（不设置的话默认1500毫秒）；status：默认0为错误提示，1为正确提示；)
 		function showTips(txt,time,status)
@@ -167,9 +168,9 @@ function MM_swapImage() { //v3.0
 			var htmlCon = '';
 			if(txt != ''){
 				if(status != 0 && status != undefined){
-					htmlCon = '<div class="tipsBox" style="width:220px;padding:10px;background-color:#4AAF33;border-radius:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;color:#fff;box-shadow:0 0 3px #ddd inset;-webkit-box-shadow: 0 0 3px #ddd inset;text-align:center;position:fixed;top:25%;left:50%;z-index:999999;margin-left:-120px;"><img src="images/ok.png" style="vertical-align: middle;margin-right:5px;" alt="OK，"/>'+txt+'</div>';
+					htmlCon = '<div class="tipsBox" style="width:220px;padding:10px;background-color:#4AAF33;border-radius:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;color:#fff;box-shadow:0 0 3px #ddd inset;-webkit-box-shadow: 0 0 3px #ddd inset;text-align:center;position:fixed;top:25%;left:50%;z-index:999999;margin-left:-120px;"><img src="../../static/images/ok.png" style="vertical-align: middle;margin-right:5px;" alt="OK，"/>'+txt+'</div>';
 				}else{
-					htmlCon = '<div class="tipsBox" style="width:220px;padding:10px;background-color:#D84C31;border-radius:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;color:#fff;box-shadow:0 0 3px #ddd inset;-webkit-box-shadow: 0 0 3px #ddd inset;text-align:center;position:fixed;top:25%;left:50%;z-index:999999;margin-left:-120px;"><img src="images/err.png" style="vertical-align: middle;margin-right:5px;" alt="Error，"/>'+txt+'</div>';
+					htmlCon = '<div class="tipsBox" style="width:220px;padding:10px;background-color:#D84C31;border-radius:4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;color:#fff;box-shadow:0 0 3px #ddd inset;-webkit-box-shadow: 0 0 3px #ddd inset;text-align:center;position:fixed;top:25%;left:50%;z-index:999999;margin-left:-120px;"><img src="../../static/images/err.png" style="vertical-align: middle;margin-right:5px;" alt="Error，"/>'+txt+'</div>';
 				}
 				$('body').prepend(htmlCon);
 				if(time == '' || time == undefined){
