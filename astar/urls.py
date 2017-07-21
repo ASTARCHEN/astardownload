@@ -21,11 +21,12 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^$', index),
-    url(r'^astardownload/$',index),
+    url(r'^astardownload/$', index),
     url(r'^admin/', admin.site.urls),
-    url(r'^astardownload/register/$',do_register),
-    url(r'^astardownload/upload/$',do_upload),
-    url(r'^astardownload/download/$',do_download),
-    url(r'^astardownload/login/$',do_login),
-    url(r'^astardownload/zone/$',myzone),
+    url(r'^astardownload/register/$', do_register),
+    url(r'^astardownload/upload/$', do_upload),
+    url(r'^astardownload/download/$', do_download),
+    url(r'^astardownload/login/$', do_login),
+    url(r'^astardownload/zone/$', myzone),
+    url(r'^astardownload/search/', include('haystack.urls')),
 ]
