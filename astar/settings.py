@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import configparser
 
-cp = configparser.ConfigParser()
+from astardownload.dbHelper import *
+
 cp.read('myconfig.conf')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -92,11 +92,11 @@ DATABASES = {
 #     }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': cp.get('db', 'name'),
-        'USER': cp.get('db', 'user'),
-        'PASSWORD': cp.get('db', 'password'),
-        'HOST': cp.get('db', 'host'),
-        'PORT': cp.get('db', 'port'),
+        'NAME': db_name,
+        'USER': db_user,
+        'PASSWORD': db_password,
+        'HOST': db_host,
+        'PORT': db_port,
     }
 }
 

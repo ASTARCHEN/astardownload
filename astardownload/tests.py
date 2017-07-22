@@ -21,7 +21,8 @@ def test_whoosh():
     t1 = time.clock()
     analyzer = RegexAnalyzer(r"([\u4e00-\u9fa5])|[A-Z]|[a-z]|(\w+(\.?\w+)*)")
     schema = Schema(title=TEXT(stored=True), path=ID(stored=True), content=TEXT(stored=True, analyzer=analyzer))
-    ix = create_in("/", schema)
+
+    ix = create_in("astardownload/", schema)
     writer = ix.writer()
     writer.add_document(title="First document", path="/a",
     content="This is the first document we’ve added!")
@@ -47,6 +48,7 @@ def test_whoosh():
     searcher = ix.searcher()
     # results = searcher.find("content", "first")
     # print(results[0]  )
+
     results = searcher.find("content", "GSO")
     t2 = time.clock()
     print(t2-t1)
